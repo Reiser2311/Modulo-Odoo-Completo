@@ -1,0 +1,85 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record model="ir.ui.view" id="video_club.premios_listado">
+            <field name="name">video_club.premios_listado</field>
+            <field name="model">video_club.premios</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="titulo"/>
+                    <field name="anyo"/>
+                    <field name="ganador"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="video_club.premios_formulario">
+            <field name="name">video_club.premios_formulario</field>
+            <field name="model">video_club.premios</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="titulo"/>
+                        <field name="anyo"/>
+                        <field name="ganador"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="video_club.premios_kanban">
+            <field name="name">video_club.premios_kanban</field>
+            <field name="model">video_club.premios</field>
+            <field name="arch" type="xml">
+                <kanban class="o_editoriales_coleccion_kanban">
+                    <field name="titulo"/>
+                    <field name="anyo"/>
+                    <field name="ganador"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="titulo" />
+                                    </strong>
+                                    <div t-if="record.titulo.value">
+                                        <t t-esc="record.titulo.value" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="video_club.premios_ventana_listado">
+            <field name="name">premios listado</field>
+            <field name="res_model">video_club.premios</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="video_club.premios_ventana_formulario">
+            <field name="name">premios window</field>
+            <field name="res_model">video_club.premios</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Top menu item -->
+
+        <menuitem name="VideoClub" id="video_club.menu_root"/>
+
+        <!-- menu categories -->
+
+        <menuitem name="Premios" id="video_club.menu_4" parent="video_club.menu_root"/>
+
+        <!-- actions -->
+
+        <menuitem name="Listado" id="video_club.menu_4_list" parent="video_club.menu_4" action="video_club.premios_ventana_listado"/>
+        <menuitem name="Formulario" id="video_club.menu_4_form" parent="video_club.menu_4" action="video_club.premios_ventana_formulario"/>
+    </data>
+</odoo>

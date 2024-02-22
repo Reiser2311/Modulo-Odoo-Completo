@@ -1,0 +1,95 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="video_club.director_listado">
+      <field name="name">video_club.director_listado</field>
+      <field name="model">video_club.director</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+          <field name="anyoNacimiento"/>
+          <field name="anyosActivo"/>
+          <field name="pelis"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario para editar o ver detalles de un Director -->
+    <record model="ir.ui.view" id="video_club.director_formulario">
+      <field name="name">video_club.director_formulario</field>
+      <field name="model">video_club.director</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="nombre"/>
+            <field name="imagen" widget="image"/>
+            <field name="anyoNacimiento"/>
+            <field name="anyosActivo"/>
+            <field name="pelis"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="video_club.director_kanban">
+      <field name="name">video_club.director_kanban</field>
+      <field name="model">video_club.director</field>
+      <field name="arch" type="xml">
+        <kanban class="o_video_club_director_kanban">
+          <field name="nombre"/>
+          <field name="id" />
+          <field name="imagen"/>
+          <field name="anyoNacimiento"/>
+          <field name="anyosActivo"/>
+          <field name="pelis"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <div class="o_image_64_contain">
+                  <img alt="Imagen del director" t-att-src="kanban_image('video_club.director', 'imagen', record.id.raw_value)" style="width:40px; height:40px" />
+                </div>
+                <div class="oe_kanban_details">
+                  <strong class="o_kanban_record_title">
+                    <field name="nombre" />
+                  </strong>
+                  <div t-if="record.nombre.value">
+                    <t t-esc="record.nombre.value" />
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="video_club.director_ventana_listado">
+      <field name="name">Director listado</field>
+      <field name="res_model">video_club.director</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="video_club.director_ventana_formulario">
+      <field name="name">Director formulario</field>
+      <field name="res_model">video_club.director</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="VideoClub" id="video_club.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Director" id="video_club.menu_1" parent="video_club.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Lista" id="video_club.menu_1_list" parent="video_club.menu_1" action="video_club.director_ventana_listado"/>
+    <menuitem name="Formulario" id="video_club.menu_1_form" parent="video_club.menu_1" action="video_club.director_ventana_formulario"/>
+  </data>
+</odoo>

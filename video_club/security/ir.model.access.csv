@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_video_club_video_club,video_club.video_club,model_video_club_video_club,base.group_user,1,1,1,1
+access_video_club_actores,video_club.actores,model_video_club.actores,,1,1,1,1
+access_video_club_director,video_club.director,model_video_club.director,,1,1,1,1
+access_video_club_premios,video_club.premios,model_video_club.premios,,1,1,1,1
+access_video_club_peliculas,video_club.peliculas,model_video_club.peliculas,,1,1,1,1
